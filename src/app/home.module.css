@@ -1,0 +1,204 @@
+.header {
+    background-color: #34177B;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo h1 {
+    font-size: 1.8rem;
+    color: #00f;
+  }
+  
+  .nav a {
+    margin-left: 20px;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .nav a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Seção Principal */
+  .main {
+    color: black;
+    text-align: center;
+    padding: 60px 20px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  /* h2 {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: #ffffff;
+  } */
+  
+  /* Container para alinhar os botões */
+  .buttoncontainer {
+    display: flex;
+    gap: 10px; /* Espaçamento entre os botões */
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  /* Estilo base dos botões */
+  .button {
+    padding: 10px 30px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px; /* Borda arredondada */
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  /* Estilo específico para o botão de Cadastro (fundo claro) */
+  .register {
+    background-color: #f0f0f0; /* Cor clara */
+    color: black;
+  }
+  
+  /* Estilo específico para o botão de Login (fundo escuro) */
+  .login {
+    background-color: #333; /* Cor escura */
+    color: white;
+  }
+  
+  /* Estilo de hover para ambos os botões */
+  .button:hover {
+    transform: scale(1.05); /* Aumenta ligeiramente o tamanho ao passar o mouse */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Imagem de Fundo */
+  .backgroundImage {
+    background-image: url('/footer.svg'); /* Substitua pelo caminho da imagem */
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 300px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+  }
+  
+  /* Página de Registro (adaptada para sua home) */
+  .register-page {
+    background: linear-gradient(to bottom, #C695F3, #CA6EE7, #CD50DE); /* Gradiente de fundo */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Estilos do conteúdo da página inicial */
+  .header-home {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 2rem;
+    background-color: #34177B; /* Cor de fundo do header */
+    margin-bottom: 100px;
+  }
+  
+  .logo-home {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-home img {
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .logo-home h1 {
+    color: #ffffff;
+    font-size: 1.5rem;
+  }
+  
+  .nav a {
+    color: #ffffff;
+    margin-left: 1rem;
+    text-decoration: none;
+  }
+  
+  /* Estilos do conteúdo principal */
+  .main-content {
+    background: rgba(255, 255, 255, 0.9); /* Caixa com leve transparência */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+    margin-top: 2rem;
+  }
+  
+  /* h2 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  } */
+  
+  /* Ajustes para a seção de botões */
+  .button-container-home {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .button-home {
+    padding: 10px 30px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .mainLogo {
+    width: 70vh;
+  }
+  
+  .register-home {
+    background-color: #f0f0f0; /* Cor clara */
+    color: black;
+  }
+  
+  .login-home {
+    background-color: #333; /* Cor escura */
+    color: white;
+  }
+  
+  .button-home:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Imagem de fundo */
+  .backgroundfooter-home {
+    background-image: url('../../public/footer.svg'); /* Substitua pelo caminho da imagem */
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+  }

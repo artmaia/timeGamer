@@ -2,20 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* src/app/styles/globals.css */
+
+/* Reseta o estilo padrão do navegador */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Estilos globais */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #d53f8c, #6b46c1); /* Gradiente inspirado no pôr do sol do GTA 6 */
+  color: #fff; /* Cor do texto em branco para contraste */
+  line-height: 1.6;
+  min-height: 100vh; /* Garantir que o fundo cubra toda a altura da página */
 }
+
+h1, h2, h3 {
+  color: #fff; /* Títulos em branco para destacar contra o fundo */
+}
+
+a {
+  text-decoration: none;
+  color: #ffde00; /* Cor amarela para links */
+}
+
+button {
+  padding: 10px 20px;
+  color: black;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Outros estilos globais que você achar necessário */
+
