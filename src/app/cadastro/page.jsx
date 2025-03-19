@@ -1,122 +1,70 @@
 'use client'
-import { useState } from 'react';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { auth } from '@/app/firebase/config';
-import { getFirestore, doc, setDoc } from 'firebase/firestore';
-import { useRouter } from 'next/navigation'; // Para redirecionamento
 
-// Configuração do Firestore
-const db = getFirestore();
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "@/app/firebase/config";
+import { doc, setDoc } from "firebase/firestore";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const SignUp = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
-  const [nickname, setNickname] = useState('');
-  const [error, setError] = useState('');
-
-  const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
-  const router = useRouter(); // Hook de navegação
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter();
 
   const handleSignUp = async () => {
-    if (!username || !nickname) {
-      setError('Username and Nickname are required');
-      return;
-    }
-
     try {
-      // Criar o usuário no Firebase Authentication
-      const res = await createUserWithEmailAndPassword(email, password);
-      console.log({ res });
+      console.log("Criando usuário no Firebase Authentication...");
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
 
-      // Salvar o perfil do usuário no Firestore
-      const userRef = doc(db, 'perfil', res.user.uid); // Usando o UID do usuário
+      console.log("Usuário criado e autenticado com sucesso!", user);
+
+      // 🔥 Garantir que auth.currentUser está correto
+      if (!auth.currentUser) {
+        console.error("Erro: Usuário não autenticado no Firebase.");
+        return;
+      }
+
+      console.log("UID autenticado no Firebase antes de salvar no Firestore:", auth.currentUser.uid);
+
+      // 🔥 **Agora podemos salvar no Firestore**
+      const userRef = doc(db, "perfil", user.uid);
       const userData = {
         username,
         nickname,
-        bio: '', // Inicializa com valor vazio, pode ser editado depois
-        avatar: '' // Inicializa com valor vazio
+        email: user.email,
+        bio: "",
+        avatar: "",
       };
 
+      console.log("Tentando salvar perfil no Firestore:", userData);
       await setDoc(userRef, userData);
+      console.log("Usuário salvo no Firestore com sucesso!");
 
-      // Limpar os campos após o sucesso
-      setEmail('');
-      setPassword('');
-      setUsername('');
-      setNickname('');
-      sessionStorage.setItem('user', true); // Marca o usuário como autenticado
-      router.push('/'); // Redireciona para a página raiz após cadastro
-    } catch (e) {
-      console.error(e);
-      setError('Failed to sign up. Please try again.');
+      setEmail("");
+      setPassword("");
+      setUsername("");
+      setNickname("");
+      sessionStorage.setItem("user", true);
+      router.push("/");
+    } catch (error) {
+      console.error("Erro ao criar usuário:", error.message);
+      setError(error.message);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-500 to-pink-500 flex flex-col">
-      
-      {/* Header com a seta para a página raiz */}
-      <header style={{ backgroundColor: '#34177B' }} className="text-white p-6 flex justify-between items-center shadow-md">
-        <div className="text-xl font-bold">
-          <img src="/logo_header.svg" alt="Logo do Site" className="h-8" />
-        </div>
-        <button 
-          onClick={() => router.push('/')} // Redireciona para a página raiz
-          className="text-white text-2xl"
-        >
-          ←
-        </button>
-      </header>
-
-      {/* Formulário de cadastro */}
-      <div className="flex flex-col items-center justify-center flex-grow">
-        <div>
-          <h1 className="text-3xl font-bold text-white mb-6">Cadastro</h1>
-
-        </div>
-        
-        <div className="bg-white p-10 rounded-lg shadow-xl w-96">
-          {/* Exibindo erros */}
-          {error && <p className="text-red-500">{error}</p>}
-
-          <input 
-            type="email" 
-            placeholder="Email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-            className="w-full p-3 mb-4 bg-gray-100 rounded outline-none text-black placeholder-gray-500"
-          />
-          <input 
-            type="password" 
-            placeholder="Password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            className="w-full p-3 mb-4 bg-gray-100 rounded outline-none text-black placeholder-gray-500"
-          />
-          <input 
-            type="text" 
-            placeholder="Username" 
-            value={username} 
-            onChange={(e) => setUsername(e.target.value)} 
-            className="w-full p-3 mb-4 bg-gray-100 rounded outline-none text-black placeholder-gray-500"
-          />
-          <input 
-            type="text" 
-            placeholder="Nickname" 
-            value={nickname} 
-            onChange={(e) => setNickname(e.target.value)} 
-            className="w-full p-3 mb-4 bg-gray-100 rounded outline-none text-black placeholder-gray-500"
-          />
-          
-          <button 
-            onClick={handleSignUp}
-            className="w-full p-3 bg-indigo-600 rounded text-white hover:bg-indigo-500"
-          >
-            Enviar
-          </button>
-        </div>
-      </div>
+    <div>
+      <h1>Cadastro</h1>
+      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
+      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Senha" />
+      <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Nome" />
+      <input type="text" value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder="Apelido" />
+      <button onClick={handleSignUp}>Cadastrar</button>
+      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 };
