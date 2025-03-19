@@ -11,17 +11,29 @@
    const router = useRouter();
  
    const handleSignIn = async () => {
-     try {
-       const res = await signInWithEmailAndPassword(email, password);
-       console.log({ res });
-       sessionStorage.setItem('user', true);
-       setEmail('');
-       setPassword('');
-       router.push('/main');
-     } catch (e) {
-       console.error(e);
-     }
-   };
+    if (!email || !password) {
+      alert("Preencha o e-mail e a senha!");
+      return;
+    }
+  
+    try {
+      const res = await signInWithEmailAndPassword(email, password);
+      console.log("Resposta Firebase:", res);
+  
+      if (!res || !res.user) {
+        console.error("Erro inesperado no login:", res);
+        return;
+      }
+  
+      sessionStorage.setItem("user", true);
+      setEmail("");
+      setPassword("");
+      router.push("/main");
+    } catch (error) {
+      console.error("Erro ao fazer login:", error);
+    }
+  };
+  
  
    return (
      <div className="min-h-screen bg-gradient-to-br from-purple-500 to-pink-500 flex flex-col">
