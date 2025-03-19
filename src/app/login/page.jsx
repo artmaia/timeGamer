@@ -55,7 +55,6 @@ const SignIn = () => {
             value={email} 
             onChange={(e) => setEmail(e.target.value)} 
             className="w-full p-3 mb-4 bg-gray-100 rounded outline-none text-black placeholder-gray-500"
-            required
           />
           <input 
             type="password" 
@@ -63,7 +62,6 @@ const SignIn = () => {
             value={password} 
             onChange={(e) => setPassword(e.target.value)} 
             className="w-full p-3 mb-4 bg-gray-100 rounded outline-none text-black placeholder-gray-500"
-            required
           />
           
           <button 
