@@ -130,7 +130,7 @@ const RewardsPage = () => {
           <img src="/logo_header.svg" alt="Logo do Site" className="h-8" />
         </div>
         <div className="space-x-4">
-          <Link href="/about us" className="hover:text-blue-300">Agradecimentos</Link>
+          <Link href="/agradecimento" className="hover:text-blue-300">Agradecimentos</Link>
           <Link href="/games" className="hover:text-blue-300">Games</Link>
           <Link href="/ranking" className="hover:text-blue-300">Ranking</Link>
         </div>
