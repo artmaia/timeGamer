@@ -15,6 +15,13 @@ const SignUp = () => {
   const router = useRouter();
 
   const handleSignUp = async () => {
+
+    if (password.length < 8) {
+      setError("A senha deve ter pelo menos 8 caracteres.");
+      return;
+    }
+
+
     try {
       console.log("Criando usuário no Firebase Authentication...");
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -57,14 +64,70 @@ const SignUp = () => {
   };
 
   return (
-    <div>
-      <h1>Cadastro</h1>
-      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Senha" />
-      <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Nome" />
-      <input type="text" value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder="Apelido" />
-      <button onClick={handleSignUp}>Cadastrar</button>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+    <div className="min-h-screen bg-gradient-to-br from-purple-500 to-pink-500 flex flex-col">
+       
+      {/* Header com a seta para a página raiz */}
+      <header style={{ backgroundColor: '#34177B' }} className="text-white p-6 flex justify-between items-center shadow-md">
+        <div className="text-xl font-bold">
+          <img src="/logo_header.svg" alt="Logo do Site" className="h-8" />
+        </div>
+        <button 
+          onClick={() => router.push('/')} // Redireciona para a página raiz
+          className="text-white text-2xl"
+        >
+          ←
+        </button>
+      </header>
+
+      {/* Formulário de cadastro */}
+      <div className="flex flex-col items-center justify-center flex-grow">
+        <div>
+          <h1 className="text-3xl font-bold text-white mb-6">Cadastro</h1>
+
+        </div>
+        
+        <div className="bg-white p-10 rounded-lg shadow-xl w-96">
+          {/* Exibindo erros */}
+          {error && <p className="text-red-500">{error}</p>}
+
+          <input 
+            type="email" 
+            placeholder="Email" 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)} 
+            className="w-full p-3 mb-4 bg-gray-100 rounded outline-none text-black placeholder-gray-500"
+          />
+          <input 
+            type="password" 
+            placeholder="Password" 
+            value={password} 
+            minLength={8}
+            onChange={(e) => setPassword(e.target.value)} 
+            className="w-full p-3 mb-4 bg-gray-100 rounded outline-none text-black placeholder-gray-500"
+          />
+          <input 
+            type="text" 
+            placeholder="Username" 
+            value={username} 
+            onChange={(e) => setUsername(e.target.value)} 
+            className="w-full p-3 mb-4 bg-gray-100 rounded outline-none text-black placeholder-gray-500"
+          />
+          <input 
+            type="text" 
+            placeholder="Nickname" 
+            value={nickname} 
+            onChange={(e) => setNickname(e.target.value)} 
+            className="w-full p-3 mb-4 bg-gray-100 rounded outline-none text-black placeholder-gray-500"
+          />
+          
+          <button 
+            onClick={handleSignUp}
+            className="w-full p-3 bg-indigo-600 rounded text-white hover:bg-indigo-500"
+          >
+            Enviar
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
