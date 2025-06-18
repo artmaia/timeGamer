@@ -1,32 +1,32 @@
 'use client'
-
+import { auth, db } from "../firebase/config";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "@/app/firebase/config";
 import { doc, setDoc } from "firebase/firestore";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [nickname, setNickname] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(""); 
   const router = useRouter();
 
   const handleSignUp = async () => {
 
-    if (password.length < 8) {
-      setError("A senha deve ter pelo menos 8 caracteres.");
+    const senhaForte = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+
+    if (!senhaForte.test(password)) {
+      setError("A senha deve ter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula, um número e um caractere especial");
       return;
+
     }
-
-
     try {
       console.log("Criando usuário no Firebase Authentication...");
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-
+    
       console.log("Usuário criado e autenticado com sucesso!", user);
 
       // 🔥 Garantir que auth.currentUser está correto
@@ -65,13 +65,12 @@ const SignUp = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-500 to-pink-500 flex flex-col">
-       
       {/* Header com a seta para a página raiz */}
       <header style={{ backgroundColor: '#34177B' }} className="text-white p-6 flex justify-between items-center shadow-md">
         <div className="text-xl font-bold">
           <img src="/logo_header.svg" alt="Logo do Site" className="h-8" />
         </div>
-        <button 
+        <button
           onClick={() => router.push('/')} // Redireciona para a página raiz
           className="text-white text-2xl"
         >
@@ -112,15 +111,15 @@ const SignUp = () => {
             onChange={(e) => setUsername(e.target.value)} 
             className="w-full p-3 mb-4 bg-gray-100 rounded outline-none text-black placeholder-gray-500"
           />
-          <input 
-            type="text" 
-            placeholder="Nickname" 
-            value={nickname} 
+          <input
+            type="text"
+            placeholder="Nickname"
+            value={nickname}
             onChange={(e) => setNickname(e.target.value)} 
             className="w-full p-3 mb-4 bg-gray-100 rounded outline-none text-black placeholder-gray-500"
           />
           
-          <button 
+          <button
             onClick={handleSignUp}
             className="w-full p-3 bg-indigo-600 rounded text-white hover:bg-indigo-500"
           >

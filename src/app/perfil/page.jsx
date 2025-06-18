@@ -33,7 +33,7 @@ const ProfilePage = () => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-        fetchProfileData(currentUser.uid); 
+        fetchProfileData(currentUser.uid);
       } else {
         setUser(null);
       }

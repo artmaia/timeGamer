@@ -1,8 +1,9 @@
 'use client'
+import { auth } from '../firebase/config';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { auth } from '@/app/firebase/config';
-import { useRouter } from 'next/navigation';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -48,6 +49,8 @@ const SignIn = () => {
     }
   };
 
+  
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-500 to-pink-500 flex flex-col">
       
@@ -70,7 +73,7 @@ const SignIn = () => {
           <h1 className="text-3xl font-bold text-white mb-6">Login</h1>
         </div>
         
-        <div className="bg-white p-10 rounded-lg shadow-xl w-96">
+        <div className="bg-white p-6 rounded-lg shadow-xl w-96">
           
           {/* Exibição da mensagem de erro */}
           {errorMessage && (
@@ -79,27 +82,28 @@ const SignIn = () => {
             </div>
           )}
 
-          <input 
-            type="email" 
-            placeholder="Email" 
-            value={email} 
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
             onChange={(e) => setEmail(e.target.value)} 
             className="w-full p-3 mb-4 bg-gray-100 rounded outline-none text-black placeholder-gray-500"
           />
-          <input 
-            type="password" 
-            placeholder="Password" 
-            value={password} 
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)} 
             className="w-full p-3 mb-4 bg-gray-100 rounded outline-none text-black placeholder-gray-500"
           />
           
-          <button 
+          <button
             onClick={handleSignIn}
-            className="w-full p-3 bg-indigo-600 rounded text-white hover:bg-indigo-500"
+            className="w-full p-2 mt-4 bg-indigo-600 rounded text-white hover:bg-indigo-500"
           >
             Sign In
           </button>
+          <p><Link href='/authLogin' className="flex justify-end mt-2 text-sm text-pink-600 underline-offset-8 hover:text-blue-300">Esqueceu a senha?</Link></p>
         </div>
       </div>
     </div>
