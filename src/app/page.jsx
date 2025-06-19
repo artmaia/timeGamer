@@ -9,9 +9,6 @@ export default function Home() {
         <div className={styles.logo}>
           <img src="/logo_header.svg" alt="Logo TimeGamer" />
         </div>
-        <nav className={styles.nav}>
-          <a href="/agradecimento">Agradecimento</a>
-        </nav>
       </header>
 
       {/* Seção principal */}
@@ -30,7 +27,6 @@ export default function Home() {
                 Login
               </button>
             </Link>
-
           </div>
         </div>
       </main>

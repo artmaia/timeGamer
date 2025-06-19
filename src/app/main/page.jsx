@@ -94,19 +94,19 @@ export default function Main() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const auth = getAuth(); 
-    const user = auth.currentUser; 
+    const auth = getAuth();
+    const user = auth.currentUser;
   
     if (user) {
       const activitiesRef = collection(db, 'atividades'); 
   
       const atividadeData = {
-        atividade,       
-        prioridade,      
-        descricao,       
-        jogo: selectedGame, 
-        uid: user.uid,   
-        createdAt: new Date(),  
+        atividade,
+        prioridade,
+        descricao,
+        jogo: selectedGame,
+        uid: user.uid,
+        createdAt: new Date(),
       };
   
       try {
@@ -250,9 +250,9 @@ export default function Main() {
 
               <div>
                 <label htmlFor="jogo" className="block text-lg">Selecione um Jogo:</label>
-                <select 
-                  id="jogo" 
-                  name="jogo" 
+                <select
+                  id="jogo"
+                  name="jogo"
                   value={selectedGame}
                   onChange={(e) => setSelectedGame(e.target.value)} 
                   className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
