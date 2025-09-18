@@ -163,6 +163,7 @@ const ActivitiesPage = () => {
 
         {/* Links no desktop */}
         <div className="hidden lg:flex space-x-4">
+          <Link href="/main" className="hover:text-blue-300">Main</Link>
           <Link href="/agradecimento" className="hover:text-blue-300">Agradecimentos</Link>
           <Link href="/games" className="hover:text-blue-300">Games</Link>
           <Link href="/ranking" className="hover:text-blue-300">Ranking</Link>
@@ -178,6 +179,7 @@ const ActivitiesPage = () => {
             <div className="w-6 h-0.5 bg-white"></div>
             <div className="w-6 h-0.5 bg-white"></div>
             <div className="w-6 h-0.5 bg-white"></div>
+            <div className="w-6 h-0.5 bg-white"></div>
           </div>
         </button>
       </header>
@@ -185,6 +187,7 @@ const ActivitiesPage = () => {
       {/* Links - Mobile, below the logo */}
       <div className="lg:hidden text-center mt-4 mb-8">
         <div className="space-x-6 flex justify-center text-sm lg:text-base">
+          <Link href="/main" className="hover:text-blue-300">Main</Link>
           <Link href="/agradecimento" className="hover:text-blue-300">Agradecimentos</Link>
           <Link href="/games" className="hover:text-blue-300">Games</Link>
           <Link href="/ranking" className="hover:text-blue-300">Ranking</Link>

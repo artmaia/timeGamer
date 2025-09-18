@@ -262,6 +262,7 @@ const FormularioProgresso = () => {
 
         {/* Links no desktop */}
         <div className="d-none d-lg-flex space-x-4">
+          <Link href="/main" className="hover:text-blue-300">Main</Link>
           <Link href="/agradecimento" className="hover:text-blue-300">Agradecimentos</Link>
           <Link href="/games" className="hover:text-blue-300">Games</Link>
           <Link href="/ranking" className="hover:text-blue-300">Ranking</Link>
@@ -274,6 +275,7 @@ const FormularioProgresso = () => {
         >
           {/* Hamburger Icon */}
           <div className="space-y-1">
+            <div className="w-6 h-0.5 bg-white"></div>
             <div className="w-6 h-0.5 bg-white"></div>
             <div className="w-6 h-0.5 bg-white"></div>
             <div className="w-6 h-0.5 bg-white"></div>
