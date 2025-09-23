@@ -23,6 +23,7 @@ const SignUp = () => {
 
 
     try {
+
       console.log("Criando usuário no Firebase Authentication...");
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
@@ -47,6 +48,10 @@ const SignUp = () => {
         avatar: "",
       };
 
+      alert("Usuário cadastrado com sucesso!");
+
+      console.log("Tentando salvar perfil para UID:", user.uid);
+
       console.log("Tentando salvar perfil no Firestore:", userData);
       await setDoc(userRef, userData);
       console.log("Usuário salvo no Firestore com sucesso!");
@@ -57,6 +62,8 @@ const SignUp = () => {
       setNickname("");
       sessionStorage.setItem("user", true);
       router.push("/");
+
+
     } catch (error) {
       console.error("Erro ao criar usuário:", error.message);
       setError(error.message);
@@ -65,7 +72,6 @@ const SignUp = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-500 to-pink-500 flex flex-col">
-       
       {/* Header com a seta para a página raiz */}
       <header style={{ backgroundColor: '#34177B' }} className="text-white p-6 flex justify-between items-center shadow-md">
         <div className="text-xl font-bold">
