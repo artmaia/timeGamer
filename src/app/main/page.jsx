@@ -1,12 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { auth } from '../firebase/config'; 
 import { getAuth } from 'firebase/auth';
-import { collection, addDoc, doc, getDoc } from 'firebase/firestore'; 
-import { db } from '../firebase/config';
+import { addDoc, collection, doc, getDoc } from 'firebase/firestore';
 import Link from 'next/link';
-import styles from './main.module.css'
+import { useEffect, useState } from 'react';
+import { auth, db } from '../firebase/config';
+import styles from './main.module.css';
 
 export default function Main() {
   const [user, setUser] = useState(null);
@@ -101,17 +100,22 @@ export default function Main() {
       const activitiesRef = collection(db, 'atividades'); 
   
       const atividadeData = {
-        atividade,       
-        prioridade,      
-        descricao,       
-        jogo: selectedGame, 
-        uid: user.uid,   
-        createdAt: new Date(),  
+        atividade,
+        prioridade,
+        descricao,
+        jogo: selectedGame,
+        criadoPor: user.uid,
+        createdAt: new Date(),
       };
+
+      if (!atividade || !prioridade || !selectedGame) {
+        alert('Por favor, preencha todos os campos obrigatórios.');
+        return;
+      }
   
       try {
         await addDoc(activitiesRef, atividadeData);
-        console.log('Atividade registrada com sucesso!');
+        console.log('Atividade enviada com sucesso:', atividadeData);
       } catch (error) {
         console.error('Erro ao enviar a atividade:', error);
       }
