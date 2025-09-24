@@ -1,12 +1,13 @@
 'use client'
-import { useState } from 'react';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '@/app/firebase/config';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loadingButton, setLoadingButton] = useState(false);
   const [errorMessage, setErrorMessage] = useState(''); // Estado para armazenar a mensagem de erro
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
   const router = useRouter();
@@ -14,11 +15,14 @@ const SignIn = () => {
   const handleSignIn = async () => {
     // Resetar mensagem de erro ao tentar um novo login
     setErrorMessage('');
+    setLoadingButton(true);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     if (!email || !password) {
       setErrorMessage('Por favor, preencha todos os campos.');
       return;
     }
+    setLoadingButton(false);
 
     try {
       const res = await signInWithEmailAndPassword(email, password);
@@ -96,9 +100,14 @@ const SignIn = () => {
           
           <button 
             onClick={handleSignIn}
-            className="w-full p-3 bg-indigo-600 rounded text-white hover:bg-indigo-500"
+            disabled={loadingButton}
+            className="flex justify-center items-center w-full p-3 bg-indigo-600 rounded text-white hover:bg-indigo-500"
           >
-            Sign In
+            {loadingButton ? (
+              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+          ) : (
+            "Enviar"
+          )}
           </button>
         </div>
       </div>
