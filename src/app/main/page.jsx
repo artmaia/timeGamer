@@ -109,13 +109,13 @@ export default function Main() {
       };
 
       if (!atividade || !prioridade || !selectedGame) {
-        alert('Por favor, preencha todos os campos obrigatórios.');
+        alert('os campos Atividade, Prioridade e Jogo são obrigatórios.');
         return;
       }
   
       try {
         await addDoc(activitiesRef, atividadeData);
-        console.log('Atividade enviada com sucesso:', atividadeData);
+        alert('Atividade enviada com sucesso!');
       } catch (error) {
         console.error('Erro ao enviar a atividade:', error);
       }
