@@ -283,7 +283,7 @@ const GoalsPage = () => {
         </div>
         {/* Links - Desktop */}
         <div className="hidden lg:flex space-x-6">
-          <Link href="/main" className="hover:text-blue-300">Main</Link>
+          <Link href="/main" className="hover:text-blue-300">Menu</Link>
           <Link href="/agradecimento" className="hover:text-blue-300">Agradecimentos</Link>
           <Link href="/games" className="hover:text-blue-300">Games</Link>
           <Link href="/ranking" className="hover:text-blue-300">Ranking</Link>

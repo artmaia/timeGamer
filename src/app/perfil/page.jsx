@@ -1,10 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { db } from '../firebase/config';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { db } from '../firebase/config';
 
 const ProfilePage = () => {
   const [profileData, setProfileData] = useState(null);
@@ -14,6 +15,7 @@ const ProfilePage = () => {
   const [nickname, setNick] = useState('');
   const [bio, setBio] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false); // Controle para abrir e fechar o sidebar no mobile
+  const router = useRouter();
 
   // Lista de avatares predefinidos (pode ser substituído por avatares dinâmicos)
   const avatarOptions = [
@@ -67,9 +69,40 @@ const ProfilePage = () => {
           avatar: selectedAvatar, // Salvando o avatar escolhido no Firestore
         }, { merge: true });
 
-        console.log('Perfil atualizado com sucesso!');
+        alert('Perfil atualizado com sucesso!');
       } catch (error) {
         console.error('Erro ao atualizar perfil:', error);
+      }
+    }
+  };
+
+  const handleDeleteProfile = async () => {
+    if (user) {
+      const userRef = doc(db, 'perfil', user.uid);
+      try {
+        await setDoc(userRef, {
+          bio: '',
+          avatar: '',
+          nickname: '',
+        }, { merge: true });
+
+        setProfileData(null);
+        setBio('');
+        setSelectedAvatar('');
+        setNick('');
+        setBio('');
+        setSelectedAvatar('');
+
+        user.delete();
+        sessionStorage.removeItem('user');
+        setUser();
+
+
+        router.push('/');
+
+        alert('Perfil excluído com sucesso!');
+      } catch (error) {
+        console.error('Erro ao excluir perfil:', error);
       }
     }
   };
@@ -191,10 +224,10 @@ const ProfilePage = () => {
                 Atualizar Perfil
               </button>
               <button
-                onClick={() => alert('Excluir Perfil')}
+                onClick={handleDeleteProfile}
                 className="px-6 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
               >
-                Excluir Perfil
+                Excluir conta
               </button>
             </div>
           </div>

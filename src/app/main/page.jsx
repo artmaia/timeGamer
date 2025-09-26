@@ -160,7 +160,7 @@ export default function Main() {
       {/* Links - Mobile, below the logo */}
       <div className="lg:hidden text-center mt-4 mb-8">
         <div className="space-x-6 flex justify-center text-sm lg:text-base">
-          <Link href="/main" className="hover:text-blue-300">Main</Link>
+          <Link href="/main" className="hover:text-blue-300">Menu</Link>
           <Link href="/about us" className="hover:text-blue-300">Agradecimentos</Link>
           <Link href="/games" className="hover:text-blue-300">Games</Link>
           <Link href="/ranking" className="hover:text-blue-300">Ranking</Link>
@@ -174,7 +174,7 @@ export default function Main() {
             <Link href="/perfil">
               <img src={avatar || '/person.svg'} alt="Imagem de Perfil" className="w-16 h-16 rounded-full cursor-pointer border-2 border-gray-300" />
             </Link>
-            <div className="text-lg font-semibold text-gray-900">{user.displayName || user.email}</div>
+            <div className="text-lg font-semibold text-gray-900">{user.displayName || user.nickname}</div>
           </div>
 
           <div className="mb-6">

@@ -77,7 +77,7 @@ const ActivitiesPage = () => {
 
       if (user) {
         const activitiesRef = collection(db, 'atividades');
-        const q = query(activitiesRef, where('uid', '==', user.uid));
+        const q = query(activitiesRef, where('criadoPor', '==', user.uid));
 
         try {
           const querySnapshot = await getDocs(q);
@@ -163,7 +163,7 @@ const ActivitiesPage = () => {
 
         {/* Links no desktop */}
         <div className="hidden lg:flex space-x-4">
-          <Link href="/main" className="hover:text-blue-300">Main</Link>
+          <Link href="/main" className="hover:text-blue-300">Menu</Link>
           <Link href="/agradecimento" className="hover:text-blue-300">Agradecimentos</Link>
           <Link href="/games" className="hover:text-blue-300">Games</Link>
           <Link href="/ranking" className="hover:text-blue-300">Ranking</Link>
