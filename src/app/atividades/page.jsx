@@ -20,9 +20,6 @@ const ActivitiesPage = () => {
   const [nickname, setNick] = useState('');
   const [bio, setBio] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false); // Controle para abrir e fechar o sidebar no mobile
-  const [isPlaying, setIsPlaying] = useState(false); // Controle para o estado do áudio
-
-  const audioRef = useRef(new Audio('/assets/sound-effect.mp3'));
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -120,11 +117,7 @@ const ActivitiesPage = () => {
           clearInterval(id);
           setIsPomodoroActive(false);
           if (!pomodoroCompleted) {
-            audioRef.current.play().catch((err) => {
-              console.error("Erro ao reproduzir áudio:", err);
-            })
             setPomodoroCompleted(true); // Marcar como notificado
-            setIsPlaying(true);
           }
           return 0;
         }
