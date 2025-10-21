@@ -76,7 +76,7 @@ const ActivitiesPage = () => {
 
       if (user) {
         const activitiesRef = collection(db, 'atividades');
-        const q = query(activitiesRef, where('criadoPor', '==', user.uid));
+        const q = query(activitiesRef, where('uid', '==', user.uid));
 
         try {
           const querySnapshot = await getDocs(q);
