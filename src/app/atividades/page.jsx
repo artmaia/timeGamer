@@ -117,7 +117,8 @@ const ActivitiesPage = () => {
           clearInterval(id);
           setIsPomodoroActive(false);
           if (!pomodoroCompleted) {
-            setPomodoroCompleted(true); // Marcar como notificado
+            setPomodoroCompleted(true);
+            alert("Pomodoro concluído!"); // Marcar como notificado
           }
           return 0;
         }
