@@ -104,7 +104,7 @@ export default function Main() {
         prioridade,
         descricao,
         jogo: selectedGame,
-        criadoPor: user.uid,
+        uid: user.uid,
         createdAt: new Date(),
       };
 
