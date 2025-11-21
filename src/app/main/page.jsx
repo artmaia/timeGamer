@@ -115,7 +115,7 @@ export default function Main() {
   
       try {
         await addDoc(activitiesRef, atividadeData);
-        alert('Atividade enviada com sucesso!');
+        alert('Atividade enviada com sucesso!, verifique a página de atividades para acompanhar.');
       } catch (error) {
         console.error('Erro ao enviar a atividade:', error);
       }
